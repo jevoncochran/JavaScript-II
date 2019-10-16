@@ -58,28 +58,85 @@ const runners = [
 // ==== Challenge 1: Use .forEach() ====
 // The event director needs both the first and last names of each runner for their running bibs. Combine both the first and last names and populate a new array called `fullNames`. This array will contain just strings.
 let fullNames = [];
+
+runners.forEach(item => {
+  fullNames.push(item.first_name + " " + item.last_name);
+  
+})
+
 console.log(fullNames);
 
 // ==== Challenge 2: Use .map() ====
 // The event director needs to have all the runners' first names in uppercase because the director BECAME DRUNK WITH POWER. Populate an array called `firstNamesAllCaps`. This array will contain just strings.
 let firstNamesAllCaps = [];
+
+runners.map(item => firstNamesAllCaps.push(item.first_name.toUpperCase()));
 console.log(firstNamesAllCaps);
 
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue. We need a filtered version of the runners array, containing only those runners with large sized shirts so they can choose a different size. This will be an array of objects.
 let runnersLargeSizeShirt = [];
+
+runners.filter(item => {
+  if (item.shirt_size === "L") {
+    runnersLargeSizeShirt.push(item);
+  }
+})
+
 console.log(runnersLargeSizeShirt);
 
 // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes. Add up all the donations and save the total into a ticketPriceTotal variable.
 let ticketPriceTotal = 0;
+
+ticketPriceTotal = runners.reduce((total, item) => total + item.donation, 0);
+
 console.log(ticketPriceTotal);
 
 // ==== Challenge 5: Be Creative ====
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
+// Need to send out an acknowledgement letter, but only for substantially large donations. Donations over $100. Create an array of company names and donation amount for all donations over $100.$100
+
+let over100 = [];
+
+runners.filter(item => {
+  if (item.donation >= 100) {
+    over100.push(`${item.company_name}: ${item.donation}`)
+  }
+})
+
+console.log(over100);
 
 // Problem 2
 
+// Make a list of the first and last names of each participant and sort this list alphabetically. Format should be "last name, first name"
+
+let lastCommaFirst = [];
+
+runners.forEach(item => {
+  lastCommaFirst.push(`${item.last_name}, ${item.first_name}`);
+})
+
+lastCommaFirst.sort();
+
+console.log(lastCommaFirst);
+
 // Problem 3
+
+// A foundation has pledged to match the first 20 donations. Use .reduce to figure out how much in additional donations are to be expected given this pledge.
+
+let first20 = 0;
+
+first20 = function(item){
+  for (item = 0; item < 20; item++) {
+  runners.reduce((total, item) => total + item.donation, 0);
+}
+}
+
+const pledge = first20 * 2;
+
+//console.log(pledge);
+
+console.log(first20);
